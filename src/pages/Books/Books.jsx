@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { data } from "react-router";
 import Book from "../Book/Book";
+// import Book from "../Book/Book";
 
-const Books = () => {
+const Books = ({ data }) => {
   const [allBooks, setAllBooks] = useState([]);
 
   //data load-1
@@ -18,15 +18,19 @@ const Books = () => {
   //   }, []);
 
   //data load-2
-  const bookPromise = fetch(
-    "https://raw.githubusercontent.com/ProgrammingHero1/boi-poka-Book-Vibe-Resources/refs/heads/main/data/booksData.json"
-  ).then((res) => res.json());
+  // const bookPromise = fetch(
+  //   "https://raw.githubusercontent.com/ProgrammingHero1/boi-poka-Book-Vibe-Resources/refs/heads/main/data/booksData.json"
+  // ).then((res) => res.json());
 
   return (
     <div>
       <h1 className="text-3xl text-center p-6">Books</h1>
       <Suspense fallback={<span>Loading...</span>}>
-        <Book bookPromise={bookPromise}></Book>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data.map((singleBook) => (
+            <Book key={singleBook.bookId} singleBook={singleBook}></Book>
+          ))}
+        </div>
       </Suspense>
     </div>
   );
