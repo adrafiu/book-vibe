@@ -5,6 +5,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import About from "../pages/About/About";
 import BookDetails from "../pages/BookDetails/BookDetails";
+import ReadList from "../pages/ReadList/ReadList";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
             "https://raw.githubusercontent.com/ProgrammingHero1/boi-poka-Book-Vibe-Resources/refs/heads/main/data/booksData.json"
           );
           const data = await res.json();
-          return data; // ✅ এখন এটা অ্যারে হবে
+          return data; //এখন এটা অ্যারে হবে
         },
         path: "/",
         Component: Home,
@@ -29,13 +30,24 @@ export const router = createBrowserRouter([
         Component: About,
       },
       {
+        path: "/readList",
+        loader: async () => {
+          const res = await fetch(
+            "https://raw.githubusercontent.com/ProgrammingHero1/boi-poka-Book-Vibe-Resources/refs/heads/main/data/booksData.json"
+          );
+          const data = await res.json();
+          return data; // ReadList-এর জন্য data পাঠানো হচ্ছে
+        },
+        Component: ReadList,
+      },
+      {
         path: "/bookDetails/:id",
         loader: async () => {
           const res = await fetch(
             "https://raw.githubusercontent.com/ProgrammingHero1/boi-poka-Book-Vibe-Resources/refs/heads/main/data/booksData.json"
           );
           const data = await res.json();
-          return data; // ✅ এখন এটা অ্যারে হবে
+          return data;
         },
         Component: BookDetails,
       },
